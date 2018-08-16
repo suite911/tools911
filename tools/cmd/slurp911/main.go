@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -11,15 +12,18 @@ import (
 )
 
 func main() {
-	if len(os.Args) < 4 {
+	outPath, pkgName, varName := "-", "main", "Slurped"
+	flag.StringVar(&outPath, "o", "-", "Output path (\"-\" for stdout)")
+	flag.StringVar(&pkgName, "p", "main", "Package name")
+	flag.StringVar(&varName, "n", "Slurped", "Variable name")
+	flag.Parse()
+	args := flag.Args()
+	if len(args) < 1 {
 		fmt.Fprintln(os.Stderr, usage)
-		if len(os.Args) >= 2 {
-			os.Exit(1)
-		}
 		return
 	}
 
-	if err := slurp911.Main(os.Args[0], os.Args[1], os.Args[4:], os.Args[2], os.Args[3]); err != nil {
+	if err := slurp911.Main(os.Args[0], outPath, args, pkgName, varName); err != nil {
 		fmt.Fprintln(os.Stderr, usage)
 		log.Fatalln(err)
 	}
