@@ -32,8 +32,8 @@ func main() {
 var usage string
 
 func init() {
-	usage = "usage: " + os.Args[0] + " " + vt.U("OUTPATH") + " " +
-		vt.U("PKGNAME") + " " + vt.U("VARNAME")  " " +
+	usage = "usage: " + os.Args[0] + " " +
+		vt.S("[") + vt.U("OPTIONS") + vt.S("]") + " " +
 		vt.U("KEY") + ":" + vt.U("PATH") + " " + vt.S("[") +
-		vt.U("KEY") + ":" + vt.U("PATH") + " " + vt.S("[...]]")
+		vt.U("KEY") + ":" + vt.U("PATH") + " " + vt.S("...]")
 }
